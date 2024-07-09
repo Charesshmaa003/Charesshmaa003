@@ -1,0 +1,154 @@
+//height
+
+#include<bits/stdc++.h>
+#include <iostream>
+using namespace std;
+class Node
+{
+    public:
+    int data;
+    Node *left;
+    Node *right;
+    Node(int val)
+    {
+        this->data=val;
+        this->left=NULL;
+        this->right=NULL;
+    }
+};
+class Tree
+{
+    public:
+    Node *root=NULL;
+    
+     
+    void insert(int val)
+    {
+       root= create_node_and_insert(root,val);
+        
+    }
+    void post()
+    {
+        post_order(root);
+    }
+     void pre()
+    {
+        pre_order(root);
+    }
+     void in()
+    {
+        in_order(root);
+    }void height()
+    {
+        cout<<findHeight(root)<<"\n";
+    }
+    Node *create_node_and_insert(Node *root,int val)
+    {
+       if(root==NULL)
+       {
+           return new Node(val);
+       }
+       else if(root->data>val)
+        {
+            root->left=create_node_and_insert(root->left,val);
+        }
+        else
+        {
+            root->right=create_node_and_insert(root->right,val);
+        } 
+        return root;
+    }
+    
+    void post_order(Node *root)
+    {
+        if(root==NULL)
+        {
+            return;
+        }
+        post_order(root->left);
+        post_order(root->right);
+        return;
+    }
+    void pre_order(Node *root)
+    {
+        if(root==NULL)
+        {
+            return;
+        }
+        pre_order(root->left);
+        pre_order(root->right);
+        return;
+    }
+    void in_order(Node *root)
+    {
+        if(root==NULL)
+        {
+            return;
+        }
+        in_order(root->left);
+        in_order(root->right);
+        return;
+    }
+    int findHeight(Node *root)
+    {
+        if( root==NULL)
+        {
+            return -1;
+        }
+        int Lsh=findHeight(root->left);
+        int Rsh=findHeight(root->right);
+        if( Lsh > Rsh)
+        {
+            return Lsh+1;
+        }
+        else
+        {
+            return Rsh+1;
+        }
+    }
+    
+};
+int main()
+{
+    /*
+    Node *root=new Node(11);
+    root->left=new Node(2);
+    root->right=new Node(5);
+    
+    root->left->left=new Node(6);
+    root->left->right=new Node(7);
+    
+    root->right->left=new Node(8);   
+    root->right->right=new Node(9);
+    
+    Tree myobj;
+    cout<<"post_order:"<<"\n";
+    myobj.post_order(root);
+    cout<<"\n";
+    cout<<"pre_order:"<<"\n";
+    myobj.pre_order(root);
+    cout<<"\n";
+    cout<<"in_order:"<<"\n";
+    myobj.in_order(root);
+    cout<<"\n";
+    */
+    int n,a,t;
+    cin>>t;
+    while(t--)
+    {
+     cin>>n;
+     Tree BST;
+     for(int i=0;i<n;i++)
+     {
+         cin>>a;
+        BST.insert(a);
+     }
+    
+    BST.post();
+    BST.height();
+     }
+    return 0;
+   
+    
+    
+}
