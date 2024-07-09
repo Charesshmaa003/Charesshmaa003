@@ -1,0 +1,124 @@
+#include <iostream>
+using namespace std;
+class node{
+  public:
+  int data;
+  node *left;
+  node *right;
+   
+  node(int val){
+      this->data=val;
+      this->left=NULL;
+      this->right=NULL;
+  }
+ 
+};
+class tree{
+    public:
+    node *root=NULL;
+    
+    node *create_node_and_insert(node *root,int val){
+        if(root==NULL){
+            return new node(val);
+        }
+        else if((root->data)>val)
+        {
+            root->left=create_node_and_insert(root->left,val);
+        }
+        else
+        {
+            root->right=create_node_and_insert(root->right,val);
+        }
+        return root;
+    }
+    
+    void insert(int val){
+        root=create_node_and_insert(root,val);
+    }
+    
+    void post(){
+        post_order(root);
+    }
+    void pre(){
+        pre_order(root);
+    }
+    void in(){
+        in_order(root);
+    }
+    
+    
+    void post_order(node *root){
+        if(root==NULL){
+            return;
+        }
+        post_order(root->left);
+        post_order(root->right);
+        cout<<root->data<<" ";
+        return;
+    }
+    void pre_order(node *root){
+        if(root==NULL){
+            return;
+        }
+        cout<<root->data<<" ";
+        pre_order(root->left);
+        pre_order(root->right);
+        return;
+    }
+    void in_order(node *root){
+        if(root==NULL){
+            return;
+        }
+        in_order(root->left);
+        cout<<root->data<<" ";
+        in_order(root->right);
+        return;
+    }
+};
+int main()
+{
+    /*
+    node *root=new node(11);
+    root->left=new node(20);
+    root->right=new node(8);
+   
+    root->left->left=new node(2);
+    root->left->right=new node(7);
+   
+    root->right->left=new node(6);
+    root->right->right-new node(15);
+   
+    tree myobj;
+    cout<<"postorder:"<<endl;
+    myobj.post_order(root);
+    cout<<endl;
+    cout<<"preorder:"<<endl;
+    myobj.pre_order(root);
+    cout<<endl;
+    cout<<"inorder:"<<endl;
+    myobj.in_order(root);
+   
+   */
+   int n,a,i,t;
+   cin>>t;
+   while(t--){
+       cin>>n;
+       tree bst;
+       for(i=0;i<n;i++)
+       {
+           cin>>a;
+           bst.insert(a);
+       }
+      bst.pre();
+      cout<<endl;
+      bst.in();
+       cout<<endl;
+      bst.post();
+       cout<<endl;
+        cout<<"\n";
+       
+   }
+  
+
+    return 0;
+}
