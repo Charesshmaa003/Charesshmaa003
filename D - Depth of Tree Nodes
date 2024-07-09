@@ -1,0 +1,72 @@
+//depth
+#include <bits/stdc++.h>
+using namespace std;
+class Node{
+public:
+int data;
+Node *left, *right;
+Node(int data)
+{
+this->data=data;
+this->left=nullptr;
+this->right=nullptr;
+}
+};
+ class tree
+ {
+public:
+Node* Insert_node (Node *root,int data)
+{
+if(root==NULL)
+{
+Node *n=new Node(data);
+root=n;
+cout<<"0"<<" ";
+return root;
+}
+else
+{
+int c=0;
+Node *temp=root, *parent=NULL;
+while(temp!=nullptr)
+{
+parent=temp;
+if(data<temp->data)
+{
+temp=temp->left;
+c++;
+}
+else{
+temp=temp->right;
+c++;
+}
+}
+Node *n=new Node(data);
+if(data<parent->data)
+{
+parent->left=n;
+}
+else
+parent->right=n;
+cout<<c<<" ";
+}
+return root;
+}
+     
+ };
+int main() {
+int  t;
+cin>>t;
+while(t--){
+int n,a;cin>>n;
+tree bst;
+Node *root=NULL;
+for(int i=0;i<n;i++)
+{
+cin>>a;
+root=bst.Insert_node(root,a);
+}
+cout<<endl;
+}
+}
+
