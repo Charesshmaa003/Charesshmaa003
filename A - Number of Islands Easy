@@ -1,0 +1,44 @@
+//island
+#include <bits/stdc++.h>
+using namespace std;
+int m[1000][1000];
+int r,c;
+vector<int>b1={-1,-1,0,1,1,1,0,-1};
+vector<int>b2={0,1,1,1,0,-1,-1,-1};
+void dfs(int i,int j){
+    if(i<0||j<0||i>=r||j>=c)
+    return;
+    if(m[i][j]==0)
+    return;
+    m[i][j]=0;
+    for(int d=0;d<8;d++){
+        dfs(b1[d]+i,b2[d]+j);
+    }
+    return;
+}
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        cin>>r>>c;
+        int count=0;
+        string s;
+        for(int i=0;i<r;i++){
+            cin>>s;
+            for(int j=0;j<c;j++){
+                if(s[j]=='1') m[i][j]=1;
+                else m[i][j]=0;
+            }
+        }
+        for(int i=0;i<r;i++){
+            for(int j=0;j<c;j++){
+                if(m[i][j]==1){
+                    dfs(i,j);
+                    count++;
+                }
+            }
+        }
+        cout<<count<<endl;
+    }
+    return 0;
+}
