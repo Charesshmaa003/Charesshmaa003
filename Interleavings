@@ -1,0 +1,38 @@
+    //A - Interleavings
+#include <bits/stdc++.h>
+using namespace std;
+void Interleavings(int i,string str1,int j,string str2,string str3,vector<string> &res ) 
+{
+   if(i==str1.length()&&j==str2.length())
+   {
+      res.push_back(str3);
+   }
+   if(i<str1.length())
+   {
+     Interleavings (i+1,str1,j,str2,str3+str1[i],res);
+   }
+   if(j<str2.length())
+   {
+     Interleavings (i,str1,j+1,str2,str3+str2[j],res);
+   }
+}
+int main()
+{
+   int t,i;
+   cin>>t;
+   for(i=1;i<=t;i++)
+   {
+      cout<<"Case #"<<i<<":\n";
+      string str1,str2;
+      cin>>str1>>str2;
+      vector<string>res;
+      Interleavings(0,str1,0,str2,"",res); 
+      sort(res.begin(),res.end());
+      for(string s:res)
+      {
+       cout<<s<<"\n";  
+      }
+      
+   }
+   
+}
